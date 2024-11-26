@@ -1,2 +1,2 @@
-# BEVK
+# FlashLingo - BEVK
 Language Learning App
