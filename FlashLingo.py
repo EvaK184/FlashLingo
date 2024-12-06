@@ -15,6 +15,13 @@ Greetings = [
     {"bulgarian": "Чао", "english": "Bye", "pronunciation": "chao"},
     {"bulgarian": "До скоро", "english": "See you soon", "pronunciation": "doh sko-ro"},
     {"bulgarian": "Благодаря", "english": "Thank you", "pronunciation": "blah-go-da-rya"},
+    {"bulgarian": "Съжалявам", "english": "I am sorry", "pronunciation": "sŭ-zha-lya-vam"},
+    {"bulgarian": "Извинявай", "english": "I am sorry in", "pronunciation": "iz-vi-nyavai"},
+    {"bulgarian": "Извинете", "english": "I am sorry fo", "pronunciation": "iz-vi-ne-te"},
+    {"bulgarian": "Моля", "english": "You are welcome", "pronunciation": "mo-lya"},
+    {"bulgarian": "Няма проблем", "english": "No problem", "pronunciation": "nya-ma pro-blem"},
+    {"bulgarian": "Добре съм. Благодаря. А ти?", "english": "I am fine. Thank you. How about you? (informal)", "pronunciation": "do-bre sŭm. bla-go-da-rya. a ti?"},
+    {"bulgarian": "Добре съм. Благодаря. А Вие?", "english": "I am fine. Thank you. How about you? (formal)", "pronunciation": "do-bre sŭm. bla-go-da-rya. a vie?"}
 ]
 
 Introducing_yourself = [
