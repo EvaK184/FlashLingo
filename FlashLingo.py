@@ -171,7 +171,65 @@ def multi_choice(words):
             print(f"Wrong! The correct answer is {word['english']} and it is pronounced {word['pronunciation']}.\n")
     print(f"Quiz complete! Your score: {score}/{len(words)}")
 
+# English to Bulgarian this time, multiple choice
+def multi_choice2(words):
+    random.shuffle(words)
+    score=0
+    
+    for word in words:
+        print(f"\nWhat is the Bulgarian translation of {word['english']}?")
+        options = [word['bulgarian']]
+        while len(options) < 4:  # Add 3 other incorrect answers
+            other_word = random.choice(words)
+            if other_word["bulgarian"] not in options:
+                options.append(other_word["bulgarian"])
+        random.shuffle(options)
+        optionsABCD = {"A": options[0], "B" : options[1], "C" : options[2], "D": options[3]}
+        user_answer=input(f"A.{options[0]} B.{options[1]} C.{options[2]} D.{options[3]}\n")
+        if optionsABCD[user_answer]==word["bulgarian"]:
+            print(f"Correct! And it is pronounced {word['pronunciation']}\n")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer is {word['bulgarian']} and it is pronounced {word['pronunciation']}.\n")
+    print(f"Quiz complete! Your score: {score}/{len(words)}")
 
+# Build the answer, word-by-word (only english to bulgarian)
+def build(words):
+    random.shuffle(words)
+    score=0
+
+    for word in words:
+        print(f"\nWhat is the Bulgarian translation of {word['english']}? (add spaces between the numbers if multiple numbers are needed for the correct answer)")
+        options = [word['bulgarian']]
+        while len(options) < 4:  # Add 3 other incorrect answers
+            other_word = random.choice(words)
+            if other_word["bulgarian"] not in options:
+                options.append(other_word["bulgarian"])
+        #make a list of individual words made out of 4 different expressions
+        split_options = options[0].split(" ") + options[1].split(" ") + options[2].split(" ") + options[3].split(" ")
+        random.shuffle(split_options) #shuffle the individual words from all of the expressions
+        options_list = []
+        for option in split_options:
+            option_dict = {str(split_options.index(option)):option} #make a dictionary with the form {individual_word_index(as a string):individual_word}
+            options_list.append(option_dict) #put all of the dictionaries together in a list
+        for x in options_list:
+            print(x)
+        user_answer=input()
+        user_answer = user_answer.split(" ") #make a list with each number in the user's answer
+        user_answer2 = []
+        for i in user_answer:
+            user_answer2.append(options_list[int(i)][i])
+        user_answer3=" ".join(user_answer2)
+        print(user_answer3)
+        if user_answer3 == word['bulgarian']:
+            print(f"Correct! And it is pronounced {word['pronunciation']}\n")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer is {word['bulgarian']} and it is pronounced {word['pronunciation']}.\n")
+    print(f"Quiz complete! Your score: {score}/{len(words)}")
+        
+
+# Initiate the game
 def main():
     print("Welcome to FlashLingo!")
     input ("Press Enter to start the quiz...")
@@ -179,11 +237,11 @@ def main():
     words = Categories[choice]
     level = input ("What level are you in this category? Press 'b' for begginer or 'i' for intermediate.")
     if level == "i":
-        quiz_user(words)
+        exercises = [build, quiz_user]
+        random.choice(exercises)(words)
     if level == "b":
-        multi_choice(words)
-        
-
+        exercises = [multi_choice, multi_choice2]
+        random.choice(exercises)(words)
 if __name__=="__main__":
     main()
     
