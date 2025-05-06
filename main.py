@@ -1,14 +1,16 @@
 # import everything
-
-from Widgets import Window
+import tkinter as tk
+from Widgets import Window, MainFrame
 from Pages import Home, CategoryChoice
 
 if __name__=="__main__":
 
     # Root Window
-    root=Window("FlashLingo")
+    #root=Window("FlashLingo")
+    root=tk.Tk("Flashlingo")
+    Main=MainFrame(root)
 
-    Home= Home(window= root.window)
+    #Home= Home(window= root.window)
 
     #category_choice=CategoryChoice(window=root.window)
 
@@ -16,4 +18,4 @@ if __name__=="__main__":
 
 
     # start window (mainloop())
-    root.start_method()
+    root.mainloop()
