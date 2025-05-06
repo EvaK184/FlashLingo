@@ -9,7 +9,7 @@ from Widgets.Button.Button import Button
 class CategoryChoice:
     """Second frame - it asks the user to choose a category to practice"""
 
-    def __init__(self, window, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.LEFT):
+    def __init__(self, window, controller, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.LEFT):
         self.frame = tk.Frame(master=window, name="home", relief=relief, bg=bg_color)
         self.side = SIDE
         self.bg_color = bg_color
