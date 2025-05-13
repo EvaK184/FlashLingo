@@ -10,14 +10,14 @@ class CategoryChoice:
     """Second frame - it asks the user to choose a category to practice"""
 
     def __init__(self, window, chosen_category = None, chose = False, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
-        self.frame = tk.Frame(master=window, name="home", relief=relief, bg=bg_color)
+        self.frame = tk.Frame(master=window, name="category_choice", relief=relief, bg=bg_color)
         self.window = window
         self.side = SIDE
         self.bg_color = bg_color
-        self.frame_content()
-        self.add_frame()
         self.chosen_category = chosen_category
         self.chose = chose
+        self.add_frame()
+        self.frame_content()
 
     def add_frame(self):
         self.frame.pack(side=self.side, fill=tk.BOTH, expand=True)
@@ -35,8 +35,9 @@ class CategoryChoice:
 
     # Need to work on what is below here!!!
     def choose_category(self, event):
-        self.chosen_category = str(event.widget).split('.')[2]
+        self.chosen_category = str(event.widget).split('.')[3]
         self.chose = True
+        print("Hello")
 
 
 def main():
