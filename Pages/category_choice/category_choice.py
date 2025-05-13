@@ -37,7 +37,6 @@ class CategoryChoice:
     def choose_category(self, event):
         self.chosen_category = str(event.widget).split('.')[3]
         self.chose = True
-        print("Hello")
 
 
 def main():
