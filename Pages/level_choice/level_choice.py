@@ -8,15 +8,18 @@ from Widgets.Button.Button import Button
 class LevelChoice:
     """Second frame - it asks the user to choose a category to practice"""
 
-    def __init__(self, window, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
-        self.frame = tk.Frame(master=window, name="home", relief=relief, bg=bg_color)
+    def __init__(self, master, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
+        self.frame = tk.Frame(master=master, name="home", relief=relief, bg=bg_color)
         self.side = SIDE
         self.bg_color = bg_color
+        self.master = master
         self.frame_content()
         self.add_frame()
 
     def add_frame(self):
         self.frame.pack(side=self.side, fill=tk.BOTH, expand=True)
+        self.master.grid_rowconfigure(0, weight=1)
+        self.master.grid_columnconfigure(0, weight=1)
 
     def frame_content(self):
         choose_category=tk.Label(self.frame, text="What level is your knowledge in this category?",

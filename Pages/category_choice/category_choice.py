@@ -9,18 +9,20 @@ from Widgets.Button.Button import Button
 class CategoryChoice:
     """Second frame - it asks the user to choose a category to practice"""
 
-    def __init__(self, window, chosen_category = None, chose = False, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
-        self.frame = tk.Frame(master=window, name="category_choice", relief=relief, bg=bg_color)
-        self.window = window
-        self.side = SIDE
+    def __init__(self, master, chosen_category = None, chose = False, bg_color=Colors.BLUE, relief=tk.SUNKEN, side=tk.TOP):
+        self.frame = tk.Frame(master=master, name="category_choice", relief=relief, bg=bg_color)
+        self.master = master
+        self.side = side
         self.bg_color = bg_color
         self.chosen_category = chosen_category
         self.chose = chose
-        self.add_frame()
         self.frame_content()
+        self.add_frame()
 
     def add_frame(self):
-        self.frame.pack(side=self.side, fill=tk.BOTH, expand=True)
+        self.frame.grid(row = 0, column = 0, sticky = "nsew")
+        self.master.grid_rowconfigure(0, weight=1)
+        self.master.grid_columnconfigure(0, weight=1)
 
     def frame_content(self):
         choose_category=tk.Label(self.frame, text="What category do you want to practise today?",
