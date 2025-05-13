@@ -1,19 +1,13 @@
 # import everything
 
-from Widgets import Window
-from Pages import Home, CategoryChoice
+from Widgets import Window, MainFrame
 
 if __name__=="__main__":
 
     # Root Window
     root=Window("FlashLingo")
 
-    Home= Home(window= root.window)
-
-    #category_choice=CategoryChoice(window=root.window)
-
-
-
+    MainFrame= MainFrame(window= root.window)
 
     # start window (mainloop())
     root.start_method()

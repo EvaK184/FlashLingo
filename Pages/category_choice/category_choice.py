@@ -9,12 +9,15 @@ from Widgets.Button.Button import Button
 class CategoryChoice:
     """Second frame - it asks the user to choose a category to practice"""
 
-    def __init__(self, window, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.LEFT):
+    def __init__(self, window, chosen_category = None, chose = False, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
         self.frame = tk.Frame(master=window, name="home", relief=relief, bg=bg_color)
+        self.window = window
         self.side = SIDE
         self.bg_color = bg_color
         self.frame_content()
         self.add_frame()
+        self.chosen_category = chosen_category
+        self.chose = chose
 
     def add_frame(self):
         self.frame.pack(side=self.side, fill=tk.BOTH, expand=True)
@@ -26,42 +29,14 @@ class CategoryChoice:
 
         for key, value in Categories.items():
             button=Button(self.frame, key.lower(), key,
-                 Colors.WHITE, Colors.BROWN, 20, 3,
-                 handle_click=None,
-                 padx=0, pady=5, side=tk.TOP)
+                          Colors.WHITE, Colors.BROWN, 20, 3,
+                          handle_click = self.choose_category,
+                          padx=0, pady=5, side=tk.TOP)
 
-
-# Need to work on what is below here!!!
-    def handle_click(self, event):
-        self.manage_button_colors(event)
-        page_name = str(event.widget).split('.')[2]
-
-        # self is left frame -> master = root
-        # right frame is in children of master
-        rightFrame = self.master.children['rightFrame']
-
-        # destroy children
-        RightFrame.destroy_children(rightFrame)
-
-        # add new page -> page_name
-        RightFrame.frame_content(rightFrame, page_name)
-
-    def manage_button_colors(self, event):
-        # clicked button -> event.widget
-        # all the menu buttons -> event.widget.master.children
-        for child in event.widget.master.winfo_children():
-            if child == event.widget:
-                child.configure(bg=Colors.BLACK, fg=Colors.WHITE)
-            else:
-                child.configure(bg=Colors.BROWN, fg=Colors.WHITE)
-
-    def selected_button_color(self, button):
-        # tk button configure
-        button.configure(bg=Colors.BLACK, fg=Colors.WHITE)
-
-
-
-
+    # Need to work on what is below here!!!
+    def choose_category(self, event):
+        self.chosen_category = str(event.widget).split('.')[2]
+        self.chose = True
 
 
 def main():
