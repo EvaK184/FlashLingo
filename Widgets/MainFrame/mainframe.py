@@ -12,14 +12,17 @@ class MainFrame(tk.Frame):
             name=name)
         self.pack(side=tk.TOP, fill=tk.BOTH, expand = True)
         self.add_views()
+        self.category_choice = None
+        self.category = None
 
     def add_views(self):
         home = Home(self)
         home.frame.focus_set()
         home.frame.bind("<Key>",self.continue_action)
 
-    def continue_action(self, event):
-        category_choice = CategoryChoice(self)
+    def continue_action(self, category_choice):
+        self.category_choice = CategoryChoice(self)
 
     def on_category_chosen(self):
+        self.category = self.category_choice.chosen_category
         level_choice = LevelChoice(self)

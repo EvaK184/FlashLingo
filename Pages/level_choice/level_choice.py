@@ -6,13 +6,14 @@ from Widgets.Button.Button import Button
 
 
 class LevelChoice:
-    """Second frame - it asks the user to choose a category to practice"""
+    """Third frame - it asks the user to say what level is their knowledge in this category"""
 
-    def __init__(self, master, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
+    def __init__(self, master, chosen_level = None, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
         self.frame = tk.Frame(master=master, name="home", relief=relief, bg=bg_color)
         self.side = SIDE
         self.bg_color = bg_color
         self.master = master
+        self.chosen_level = chosen_level
         self.frame_content()
         self.add_frame()
 
@@ -31,5 +32,9 @@ class LevelChoice:
         for level in levels:
             button=Button(self.frame, level.lower(), level,
                  Colors.WHITE, Colors.BROWN, 20, 3,
-                 handle_click=None,
+                 handle_click = self.choose_level,
                  padx=0, pady=5, side=tk.TOP)
+
+    def choose_level(self, event):
+        self.chosen_level = str(event.widget).split('.')[3]
+        print(self.chosen_level)
