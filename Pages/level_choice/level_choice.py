@@ -17,7 +17,7 @@ class LevelChoice:
         self.add_frame()
 
     def add_frame(self):
-        self.frame.pack(side=self.side, fill=tk.BOTH, expand=True)
+        self.frame.grid(row = 0, column = 0, sticky = "nsew")
         self.master.grid_rowconfigure(0, weight=1)
         self.master.grid_columnconfigure(0, weight=1)
 

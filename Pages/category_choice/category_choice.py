@@ -35,11 +35,12 @@ class CategoryChoice:
                           handle_click = self.choose_category,
                           padx=0, pady=5, side=tk.TOP)
 
-    # Need to work on what is below here!!!
     def choose_category(self, event):
         self.chosen_category = str(event.widget).split('.')[3]
         self.chose = True
+        self.master.on_category_chosen()
 
+# Need to work on what is below here!!!
 
 def main():
     choice = input(

@@ -21,5 +21,5 @@ class MainFrame(tk.Frame):
     def continue_action(self, event):
         category_choice = CategoryChoice(self)
 
-        if category_choice.chose == True:
-            level_choice = LevelChoice(self)
+    def on_category_chosen(self):
+        level_choice = LevelChoice(self)
