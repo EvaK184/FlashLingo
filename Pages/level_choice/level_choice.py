@@ -8,12 +8,12 @@ from Widgets.Button.Button import Button
 class LevelChoice:
     """Third frame - it asks the user to say what level is their knowledge in this category"""
 
-    def __init__(self, master, chosen_level = None, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
+    def __init__(self, master, bg_color=Colors.BLUE, relief=tk.SUNKEN, SIDE=tk.TOP):
         self.frame = tk.Frame(master=master, name="home", relief=relief, bg=bg_color)
         self.side = SIDE
         self.bg_color = bg_color
         self.master = master
-        self.chosen_level = chosen_level
+        self.chosen_level = None
         self.frame_content()
         self.add_frame()
 
@@ -37,4 +37,4 @@ class LevelChoice:
 
     def choose_level(self, event):
         self.chosen_level = str(event.widget).split('.')[3]
-        print(self.chosen_level)
+        self.master.start_quiz()

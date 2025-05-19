@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from Data.colors import Colors
-from Widgets.Button.Button import Button
+from Widgets.Button.Button import Button2
 from Data.bulgarian import *
 from Data.categories import Categories
 import random
@@ -14,6 +14,7 @@ class QuizBeginner:
         self.side = SIDE
         self.bg_color = bg_color
         self.master = master
+        self.chosen_answer = None
         self.multi_choice()
         self.add_frame()
 
@@ -26,19 +27,46 @@ class QuizBeginner:
 
     def multi_choice(self):
         category = self.master.category
+        words = Categories[category]
 
+        random.shuffle(words)
+        score = 0
 
-        choose_category = tk.Label(self.frame, text="What level is your knowledge in this category?",
+        for word in words:
+            question = tk.Label(self.frame, text=f"\nWhat is the English translation of {word['bulgarian']}?",
                                  font=("Century Gothic", 25, "bold"), fg=Colors.BROWN, bg=self.bg_color)
-        choose_category.pack(side="top", pady=(100, 100))
+            question.grid(row = 0, column = 0, sticky = "nsew")
+            self.frame.grid_rowconfigure(5, weight=1)
+            self.frame.grid_columnconfigure(0, weight=1)
 
-        levels = ("Beginner", "Intermediate", "Advanced")
+            options = [word['english']]
 
-        for level in levels:
-            button=Button(self.frame, level.lower(), level,
-                 Colors.WHITE, Colors.BROWN, 20, 3,
-                 handle_click = None,
-                 padx=0, pady=5, side=tk.TOP)
+            while len(options) < 4:  # Add 3 other incorrect answers
+                other_word = random.choice(words)
+                if other_word["english"] not in options:
+                    options.append(other_word["english"])
+
+            random.shuffle(options)
+
+            optionsABCD = {"A": options[0], "B": options[1], "C": options[2], "D": options[3]}
+
+            for i, (key, value) in enumerate(optionsABCD.items()):
+                button=Button2(self.frame, key.lower(), value,
+                     Colors.WHITE, Colors.BROWN, 20, 3, epady=4,
+                     handle_click = None,
+                     row = i+1, column = 0)
+
+            break
+
+    def choose_answer(self, event):
+        self.chosen_answer = str(event.widget).split('.')[3]
+
+
+        def choose_level(self, event):
+            self.chosen_level = str(event.widget).split('.')[3]
+            self.master.start_quiz()
+
+
 
 # from original
 def multi_choice(words):
