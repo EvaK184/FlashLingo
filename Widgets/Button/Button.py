@@ -76,8 +76,6 @@ class Button2:
     def add_button(self):
         self.button.configure(font=('Arial', 12))
         self.button.grid(row = self.row, column = self.column, padx =self.epadx, pady = self.epady)
-        self.master.grid_rowconfigure(0, weight=1)
-        self.master.grid_columnconfigure(0, weight=1)
 
     # event binding to button
     def bind_event(self, handle_click):
