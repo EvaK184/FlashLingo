@@ -27,6 +27,7 @@ class QuizBeginner:
         self.feedback = None
         self.end_msf = None
         self.back = None
+        self.engVSbulg = None
         self.multi_choice()
         self.add_frame()
 
@@ -48,7 +49,8 @@ class QuizBeginner:
 
         random.shuffle(self.words)
         self.score = 0
-        self.questions()
+        self.engVSbulg = [self.questions, self.questions2]
+        random.choice(self.engVSbulg)()
 
     def questions(self):
         self.word = self.words[self.index]
@@ -96,6 +98,52 @@ class QuizBeginner:
                 handle_click = self.next_question,
                 row = 0, column = 0, epady = (80,0))
 
+    def questions2(self):
+        self.word = self.words[self.index]
+        self.question = tk.Label(self.frame, text=f"\nWhat is the Bulgarian translation of {self.word['english']}?",
+                             font=("Century Gothic", 25, "bold"), fg=Colors.BROWN, bg=self.bg_color, wraplength=900)
+        self.question.grid(row = 0, column = 0, sticky = "nsew")
+
+        options = [self.word['bulgarian']]
+
+        while len(options) < 4:  # Add 3 other incorrect answers
+            other_word = random.choice(self.words)
+            if other_word["bulgarian"] not in options:
+                options.append(other_word["bulgarian"])
+
+        random.shuffle(options)
+
+        self.optionsABCD = {"A": options[0], "B": options[1], "C": options[2], "D": options[3]}
+
+        for i, (key, value) in enumerate(self.optionsABCD.items()):
+            button=Button2(self.frame, key.lower(), value,
+                 Colors.WHITE, Colors.BROWN, 20, 3, epady=4,
+                 handle_click = self.choose_answer2,
+                 row = i+1, column = 0)
+            self.answer_buttons.append(button)
+
+    def choose_answer2(self, event):
+        self.chosen_answer = str(event.widget).split('.')[3].upper()
+        for i in range(4):
+            self.answer_buttons[i].button.destroy()
+        if self.optionsABCD[self.chosen_answer] == self.word["bulgarian"]:
+            self.feedback = tk.Label(self.frame2, text=f"Correct! And it is pronounced {self.word['pronunciation']}\n",
+                                 font=("Century Gothic", 25, "bold"), fg=Colors.BROWN, bg=self.bg_color, wraplength=900)
+            self.feedback.grid(row = 0, column = 0, sticky = "n")
+            self.score += 1
+            self.next = Button2(self.frame2, "next", "Next",
+                Colors.WHITE, Colors.BROWN, 12, 1,
+                handle_click = self.next_question,
+                row = 0, column = 0, epady = (40,0))
+        else:
+            self.feedback = tk.Label(self.frame2, text=f"Wrong! The correct answer is '{self.word['bulgarian']}' and it is pronounced {self.word['pronunciation']}.",
+                                 font=("Century Gothic", 25, "bold"), fg=Colors.BROWN, bg=self.bg_color, wraplength=900)
+            self.feedback.grid(row = 0, column = 0, pady = 0, sticky = "n")
+            self.next = Button2(self.frame2, "next", "Next",
+                Colors.WHITE, Colors.BROWN, 12, 1,
+                handle_click = self.next_question,
+                row = 0, column = 0, epady = (80,0))
+
     def next_question(self, event):
         self.index += 1
         self.next.button.destroy()
@@ -104,7 +152,7 @@ class QuizBeginner:
         if self.index == 10:
             self.end_quiz()
         else:
-            self.questions()
+            random.choice(self.engVSbulg)()
 
     def end_quiz(self):
         for widget in self.frame.winfo_children():
