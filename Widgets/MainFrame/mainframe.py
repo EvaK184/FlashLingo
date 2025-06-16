@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from  Data.colors import Colors
-from Pages import Home, CategoryChoice, LevelChoice, QuizBeginner
+from Pages import Home, CategoryChoice, LevelChoice, QuizBeginner, QuizIntermediate
 
 class MainFrame(tk.Frame):
     """ The main frame will be the parent for all the main pages/views and will control the navigation between them """
@@ -31,4 +31,5 @@ class MainFrame(tk.Frame):
 
     def start_quiz(self):
         self.level = self.level_choice.chosen_level
-        quiz = QuizBeginner(self)
+        #quiz = QuizBeginner(self)
+        quiz = QuizIntermediate(self)

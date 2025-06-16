@@ -45,13 +45,12 @@ class Button:
 # Secondary Button class -> Gridded
 class Button2:
     """It will create Tkinter Button."""
-    def __init__(self, master, name, text,
+    def __init__(self, master, text,
                  fg, bg, width, height,
                  handle_click,
                  padx=0, pady=0, epadx=0, epady=0, row = 0, column = 0, side=tk.TOP):
         self.button = tk.Button(
             master=master,
-            name=name,
             text=text,
             fg=fg,
             bg=bg,
